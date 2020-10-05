@@ -1,4 +1,4 @@
-# flutter_doctor
+# fruit_doctor
 
 A new Flutter application.
 
