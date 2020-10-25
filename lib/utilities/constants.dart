@@ -17,3 +17,32 @@ final zFruitDoctorThemeData = ThemeData(
   dialogBackgroundColor: kScaffoldBackgroundColor,
   scaffoldBackgroundColor: kScaffoldBackgroundColor,
 );
+
+final zLoginBoxDecorationStyle = BoxDecoration(
+  color: kTealColor.withOpacity(0.8),
+  borderRadius: BorderRadius.circular(10.0),
+  boxShadow: [
+    BoxShadow(
+      color: Colors.green,
+      blurRadius: 6.0,
+      offset: Offset(0, 2),
+    ),
+  ],
+);
+
+final zLoginHintTextStyle = TextStyle(
+  color: Colors.white,
+  fontFamily: 'CM Sans Serif',
+);
+
+final zLoginLabelStyle = TextStyle(
+  color: kTealColor,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'CM Sans Serif',
+);
+
+final zBottomNavBarTextStyle = TextStyle(
+  fontSize: 22.0,
+  color: Colors.white,
+  fontFamily: 'CM Sans Serif',
+);
