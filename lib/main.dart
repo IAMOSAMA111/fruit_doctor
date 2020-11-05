@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_doctor/Screens/login.dart';
+import 'package:flutter_doctor/Screens/signup.dart';
 import 'package:flutter_doctor/utilities/constants.dart';
-import 'login.dart';
 import 'routes.dart';
 void main() {
   runApp(FruitDoctor());
