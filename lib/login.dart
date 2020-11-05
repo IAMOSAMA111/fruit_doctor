@@ -30,24 +30,52 @@ class _LoginState extends State<Login> {
 
           child: Column(
             children: [
-              SizedBox(
-                height: 50,
+              Padding(
+                padding: EdgeInsets.fromLTRB(290, 10, 0, 0),
+                child: ButtonTheme(
+                  buttonColor: Colors.redAccent,
+                  minWidth: 100,
+                  child: RaisedButton(
+
+                    shape:RoundedRectangleBorder(
+
+                        borderRadius: BorderRadius.circular(10)
+                    ),
+                    onPressed: (){},
+                    child: Text('Sign up', style: TextStyle(color: Colors.white
+                        , fontSize: 15),),
+                  ),
+                )
+
               ),
-              Flexible(
-                flex: 2,
-                  child: Container(
-                    child:ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image(
-                        height: 150,
-                        width: 150,
-                        image: AssetImage('assets/images/fruits.jpg'),
+              SizedBox(
+                height: 60,
+              ),
+
+              Container(
+                    child:Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(30),
+                            child: Image(
+                              height: 50,
+                              width: 50,
+                              image: AssetImage('assets/images/fruits.jpg'),
+                            ),
+                          ),
+                          SizedBox(width: 5,),
+                          Text("Fruit Doctor",
+                            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold,
+                            fontFamily:'', color: Colors.black
+                          ),)
+                        ],
                       ),
                     ) ,
-                  )
               ),
               SizedBox(
-                height: 50,
+                height: 30,
               ),
               Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -59,7 +87,7 @@ class _LoginState extends State<Login> {
                         height: 60.0,
                         width:MediaQuery.of(context).size.width - 100 ,
                         child: TextField(
-                          keyboardType: TextInputType.number,
+                          keyboardType: TextInputType.emailAddress,
                           onChanged: (value) {
                             this._phone = value;
                           },
@@ -71,10 +99,10 @@ class _LoginState extends State<Login> {
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.only(top: 18.0),
                             prefixIcon: Icon(
-                              Icons.phone,
+                              Icons.alternate_email,
                               color: Colors.white,
                             ),
-                            hintText: 'Enter your Number',
+                            hintText: 'Enter your Email',
                             hintStyle: zLoginHintTextStyle,
                           ),
                         ),
@@ -117,40 +145,7 @@ class _LoginState extends State<Login> {
                       SizedBox(
                         height: 10,
                       ),
-                      Container(
-                        height: 22.0,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Theme(
-                              data: ThemeData(unselectedWidgetColor: kTealColor),
-                              child: Checkbox(
-                                value: _rememberMe,
-                                checkColor: kTealColor,
-                                activeColor: kScaffoldBackgroundColor,
-                                onChanged: (value) {
-                                  setState(() {
-                                    _rememberMe = value;
-                                  });
-                                },
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
 
-                            Padding(
-                              padding: const EdgeInsets.only(top: 2.5),
-                              child: Text(
-                                'Keep me signed in',
-                                style: zLoginLabelStyle.copyWith(color: kTealColor),
-                              ),
-                            ),
-
-                          ],
-                        ),
-                      ),
                       SizedBox(
                         height: 20,
                       ),
@@ -160,7 +155,7 @@ class _LoginState extends State<Login> {
                           children: [
                                 ButtonTheme(
                                   buttonColor: Colors.blueAccent,
-                                  minWidth: 250,
+                                  minWidth: 200,
                                   child: RaisedButton(
 
                                     shape:RoundedRectangleBorder(
@@ -171,42 +166,52 @@ class _LoginState extends State<Login> {
                                     child: Text('Login', style: TextStyle(color: Colors.white
                                     , fontSize: 20),),
                                   ),
-                                )
+                                ),
+
                           ],
                         ),
 
                       ),
 
                       SizedBox(
-                        height: 60,
+                        height: 100,
                       ),
 
                         ],
                       ),
 
+                      Text("Or login with ", style: TextStyle(fontSize: 20, color: Colors.black),),
+
+                      SizedBox(
+                        height: 50,
+                      ),
 
                       Container(
-                        height:MediaQuery.of(context).size.height/5 ,
+                        height:MediaQuery.of(context).size.height/9 ,
                         alignment: Alignment.center,
                         color: Colors.white,
-                        child: Padding(padding: const EdgeInsets.only(top: 5),
-                          child: Row(
+                        child: Padding(padding: const EdgeInsets.only(top: 2),
+                          child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              ButtonTheme(
-                                buttonColor: Colors.redAccent,
-                                minWidth: 250,
-                                child: RaisedButton(
-
-                                  shape:RoundedRectangleBorder(
-
-                                      borderRadius: BorderRadius.circular(10)
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  GestureDetector(
+                                    child:Image( height: 40,
+                                        image: AssetImage('assets/images/facebookicon.png')
+                                    ),
                                   ),
-                                  onPressed: (){},
-                                  child: Text('Sign up', style: TextStyle(color: Colors.white
-                                      , fontSize: 20),),
-                                ),
-                              )
+
+                                  SizedBox(width: 40,),
+                                  GestureDetector(
+
+                                    child: Image( height: 40,
+                                        image: AssetImage('assets/images/googleicon.png')
+                                    ),
+                                  )
+                                ],
+                              ),
                             ],
                           ),
 
