@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_doctor/utilities/constants.dart';
 import 'package:flutter_doctor/Screens/signup.dart';
-
-
+import 'package:flutter_doctor/Screens/bottomnav.dart';
 
 
 class Login extends StatefulWidget {
@@ -170,7 +169,8 @@ class _LoginState extends State<Login> {
 
                                           borderRadius: BorderRadius.circular(10)
                                       ),
-                                      onPressed: (){},
+                                      onPressed: (){
+                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>(BottomNavigation())));                                      },
                                       child: Text('Login', style: TextStyle(color: Colors.white
                                       , fontSize: 20),),
                                     ),

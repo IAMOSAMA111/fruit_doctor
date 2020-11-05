@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_doctor/Screens/bottomnav.dart';
 import 'package:flutter_doctor/Screens/login.dart';
 import 'package:flutter_doctor/Screens/signup.dart';
 import 'package:flutter_doctor/utilities/constants.dart';
@@ -14,7 +15,7 @@ class FruitDoctor extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Fruit Doctor',
       theme: zFruitDoctorThemeData,
-      initialRoute: Login.id,
+      initialRoute: Signup.id,
       routes: Routes.ROUTE,
 
     );
