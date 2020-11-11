@@ -153,7 +153,74 @@ class _HomeState extends State<Home> {
                       child: TabBarView(children: [
                         Container(
                           color: Colors.redAccent,
-                          child: Text("Apple Body"),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: GestureDetector(
+                                  onTap: (){},
+                                  child: Card(
+                                    child: Padding(
+                                      padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+                                      child: Container(
+                                        width: (MediaQuery.of(context).size.width/3)+30,
+                                        height: MediaQuery.of(context).size.height/8,
+
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                CircleAvatar(
+                                                  radius:25,
+                                                    backgroundColor: Colors.grey,
+                                                    child: Icon(FontAwesomeIcons.calculator, color: Colors.black54, size: 30,),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(height: 10,),
+                                            Text("Calculate Fertilizer", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),)
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: GestureDetector(
+                                  onTap: (){},
+                                  child: Card(
+                                    child: Padding(
+                                      padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+                                      child: Container(
+                                        width: (MediaQuery.of(context).size.width/3)+30,
+                                        height: MediaQuery.of(context).size.height/8,
+
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                CircleAvatar(
+                                                  radius:25,
+                                                  backgroundColor: Colors.lightGreen,
+                                                  child: Icon(FontAwesomeIcons.bug, color: Colors.black54, size: 30,),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(height: 10,),
+                                            Text("Pest and Diseases", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),)
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
                         ),
                         Container(
                           color: Colors.deepOrangeAccent,
