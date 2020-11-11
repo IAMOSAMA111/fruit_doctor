@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'home.dart';
 class BottomNavigation extends StatefulWidget {
   static const String id ='BottomNavigation'  ;
   @override
@@ -9,7 +10,7 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> {
   int _selectedPage =0;
   final _pageOption = [
-    Text("Home", style: TextStyle(fontSize: 20),),
+    Home(),
     Text("Community", style: TextStyle(fontSize: 20),),
     Text("Todoist", style: TextStyle(fontSize: 20),),
     Text("Profile", style: TextStyle(fontSize: 20),),

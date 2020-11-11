@@ -17,7 +17,7 @@ class FruitDoctor extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Fruit Doctor',
       theme: zFruitDoctorThemeData,
-      initialRoute: Weather.id,
+      initialRoute: BottomNavigation.id,
       routes: Routes.ROUTE,
 
     );

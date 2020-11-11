@@ -4,8 +4,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart'as http;
 
 
+
 class Weather extends StatefulWidget {
   static const String id = 'Weather';
+
+
   @override
   _WeatherState createState() => _WeatherState();
 }
@@ -19,8 +22,10 @@ class _WeatherState extends State<Weather> {
   var windSpeed;
   var visibility;
 
+
+
   Future getWeatherInfo ()async {
-    http.Response response = await http.get('http://api.openweathermap.org/data/2.5/weather?q=Islamabad&units=metric&appid=0437d87a63a252bcfeadc3cb929537f4');
+    http.Response response = await http.get('/http://api.openweathermap.org/data/2.5/weather?q=Islamabad&units=metric&appid=0437d87a63a252bcfeadc3cb929537f4');
     var results = jsonDecode(response.body);
     setState(() {
       this.temp = results['main']['temp'];
@@ -32,6 +37,7 @@ class _WeatherState extends State<Weather> {
 
     });
   }
+
   @override
   void initState(){
     super.initState();
