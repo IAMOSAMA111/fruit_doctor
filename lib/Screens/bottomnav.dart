@@ -23,7 +23,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         child: Scaffold(
           body:_pageOption[_selectedPage],
             bottomNavigationBar: BottomNavigationBar(
-              selectedItemColor: Colors.green,
+              selectedItemColor:  Color(0xff45736A),
               unselectedItemColor: Colors.blueGrey,
               currentIndex: _selectedPage,
               onTap: (int index){

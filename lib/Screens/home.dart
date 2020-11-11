@@ -113,7 +113,7 @@ class _HomeState extends State<Home> {
                   Container(
                     constraints: BoxConstraints.expand(height: 50),
                     child: TabBar(
-                        indicatorColor: Colors.green,
+                        indicatorColor:  Color(0xff45736A),
                         isScrollable: true,
 
                         tabs: [
@@ -164,7 +164,7 @@ class _HomeState extends State<Home> {
                           child: Text("pomegranate Body"),
                         ),
                         Container(
-                          color: Colors.green,
+                          color:  Color(0xff45736A),
                           child: Text("Water Mellon Body"),
                         ),
                       ]),
@@ -234,7 +234,7 @@ class _HomeState extends State<Home> {
                               child: Icon(FontAwesomeIcons.camera, color: Colors.white,),
                             ),
                             SizedBox(width: 10,),
-                            Text('Take a picture', style: TextStyle(color: Colors.white
+                            Text('Open camera', style: TextStyle(color: Colors.white
                                 , fontSize: 18),),
                           ],
                         ),
