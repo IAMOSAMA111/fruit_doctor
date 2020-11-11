@@ -240,6 +240,9 @@ class _SignupState extends State<Signup> {
 
                                 SizedBox(width: 40,),
                                 GestureDetector(
+                                  onTap: (){
+
+                                  },
 
                                   child: Image( height: 40,
                                       image: AssetImage('assets/images/googleicon.png')
