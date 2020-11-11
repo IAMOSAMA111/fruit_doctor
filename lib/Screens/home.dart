@@ -11,6 +11,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'weather.dart';
 
 
+
+
 class Home extends StatefulWidget {
   static const String id = 'Home';
   @override
@@ -251,58 +253,64 @@ class _HomeState extends State<Home> {
             height: 5.0,
           ),
 
-          Card(
-            elevation: 15.0,
-            child: Container(
-              child: Column(
-                children: [
-                  SizedBox(height: 10,),
-                  Row(
-                    
-                    children: [
-                      Text(_currentAddress!= null  && _currentPosition!=null? _currentAddress+",":"loading",
+          GestureDetector(
+            onTap:(){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>Weather()));
+            }
+            ,
+    child: Card(
+              elevation: 15.0,
+              child: Container(
+                child: Column(
+                  children: [
+                    SizedBox(height: 10,),
+                    Row(
+                      
+                      children: [
+                        Text(_currentAddress!= null  && _currentPosition!=null? _currentAddress+",":"loading",
+                          style: TextStyle(fontWeight: FontWeight.w600),
+                        ),
+                        SizedBox(width: 5,),
+                        Text(months[current_mon-1].toString()+ " "+ date.toString()+"  "+time.toString(),
                         style: TextStyle(fontWeight: FontWeight.w600),
-                      ),
-                      SizedBox(width: 5,),
-                      Text(months[current_mon-1].toString()+ " "+ date.toString()+"  "+time.toString(),
-                      style: TextStyle(fontWeight: FontWeight.w600),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 7.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(FontAwesomeIcons.cloudSunRain,size: 30,),
-                      SizedBox(width: 20,),
-                      Text(temp != null ? temp.toString()+"52\u00B0C": "Loading",
-                        style: TextStyle(
-                          fontSize: 40,
-                          fontWeight: FontWeight.w600
                         ),
-                      ),
-                    ],
-                  ),
-                  Divider(
-                    color: Colors.blueGrey,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Text(description != null ? description.toString(): "Loading",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 7.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(FontAwesomeIcons.cloudSunRain,size: 30,),
+                        SizedBox(width: 20,),
+                        Text(temp != null ? temp.toString()+"52\u00B0C": "Loading",
+                          style: TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.w600
+                          ),
                         ),
-                      ),
+                      ],
+                    ),
+                    Divider(
+                      color: Colors.blueGrey,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Text(description != null ? description.toString(): "Loading",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
 
-                    ],
+                      ],
 
-                  ),
+                    ),
     
-                ],
+                  ],
+                ),
               ),
             ),
           )
