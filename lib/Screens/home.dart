@@ -11,7 +11,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'weather.dart';
 import 'package:flutter_doctor/utilities/constants.dart';
 
-
 class Home extends StatefulWidget {
   static const String id = 'Home';
   @override
@@ -91,6 +90,7 @@ class _HomeState extends State<Home> {
     'November',
     'December'
   ];
+
   var current_mon = now.month;
   var date = now.day;
   var time = now.hour;
@@ -105,7 +105,8 @@ class _HomeState extends State<Home> {
         centerTitle: true,
         backgroundColor: primary_Color,
       ),
-      body: Column(
+      body: Container(
+          child: Column(
         children: [
           SizedBox(
             height: MediaQuery.of(context).size.height / 4,
@@ -116,7 +117,7 @@ class _HomeState extends State<Home> {
                   Container(
                     constraints: BoxConstraints.expand(height: 60),
                     child: TabBar(
-                        indicatorColor: primary_Color,// Color(0xff45736A),
+                        indicatorColor: primary_Color, // Color(0xff45736A),
                         isScrollable: true,
                         tabs: [
                           Tab(
@@ -171,7 +172,6 @@ class _HomeState extends State<Home> {
                             ),
                           ),
                           Tab(
-                            
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -187,7 +187,7 @@ class _HomeState extends State<Home> {
                                 )
                               ],
                             ),
-                          ),
+                          )
                         ]),
                   ),
                   Expanded(
@@ -196,16 +196,16 @@ class _HomeState extends State<Home> {
                         Container(
                             color: Colors.redAccent,
                             child: Row(
-                              
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(5,5,5,5),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(5, 5, 5, 5),
                                   child: GestureDetector(
                                     onTap: () {},
                                     child: Card(
                                       child: Padding(
                                         padding: const EdgeInsets.fromLTRB(
-                                            8,0,8,0),
+                                            8, 0, 8, 0),
                                         child: Container(
                                           width: (MediaQuery.of(context)
                                                       .size
@@ -217,7 +217,8 @@ class _HomeState extends State<Home> {
                                                   .height /
                                               8,
                                           child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               Row(
                                                 mainAxisAlignment:
@@ -254,7 +255,8 @@ class _HomeState extends State<Home> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(5,5,5,5),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(5, 5, 5, 5),
                                   child: GestureDetector(
                                     onTap: () {},
                                     child: Card(
@@ -272,7 +274,8 @@ class _HomeState extends State<Home> {
                                                   .height /
                                               8,
                                           child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               Row(
                                                 mainAxisAlignment:
@@ -328,172 +331,185 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
-          SizedBox(
-            height: 10,
-          ),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height * 0.01),
-            child: Card(
-              elevation: 15,
-              child: Container(
-                child: Column(
-                  children: [
-                    Row(
+              child: Column(
+            children: [
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.height * 0.01),
+                child: Card(
+                  elevation: 15,
+                  child: Container(
+                    child: Column(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Text(
-                            "HEAL YOUR FRUITS",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w900,),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Text(
+                                "HEAL YOUR FRUITS",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          height: MediaQuery.of(context).size.height / 8,
+                          width: MediaQuery.of(context).size.width,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image(
+                                  image:
+                                      AssetImage('assets/images/home/ins.png')),
+                              SizedBox(width: 6)
+                            ],
                           ),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      height: MediaQuery.of(context).size.height / 8,
-                      width: MediaQuery.of(context).size.width,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image(
-                              image: AssetImage('assets/images/home/ins.png')),
-                          SizedBox(width: 6)
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ButtonTheme(
-                          buttonColor: primary_Color,
-                          minWidth: 300,
-                          child: RaisedButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                            onPressed: () {
-                              Navigator.push(context, MaterialPageRoute());
-                            },
-                            child: Row(
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Icon(
-                                    FontAwesomeIcons.camera,
-                                    color: Colors.white,
-                                  ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ButtonTheme(
+                              buttonColor: primary_Color,
+                              minWidth: 300,
+                              child: RaisedButton(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15)),
+                                onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute());
+                                },
+                                child: Row(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: Icon(
+                                        FontAwesomeIcons.camera,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      'Open camera',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 18),
+                                    ),
+                                  ],
                                 ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  'Open camera',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 18),
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 5.0,
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Weather()));
-            },
-            child: Card(
-              elevation: 15.0,
-              child: Container(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          _currentAddress != null && _currentPosition != null
-                              ? _currentAddress + ","
-                              : "loading",
-                          style: TextStyle(fontWeight: FontWeight.w600),
+                          ],
                         ),
                         SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          months[current_mon - 1].toString() +
-                              " " +
-                              date.toString() +
-                              "  " +
-                              time.toString(),
-                          style: TextStyle(fontWeight: FontWeight.w600),
+                          height: 5,
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 7.0,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          FontAwesomeIcons.cloudSunRain,
-                          size: 30,
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          temp != null
-                              ? temp.toString() + "52\u00B0C"
-                              : "Loading",
-                          style: TextStyle(
-                              fontSize: 40, fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    ),
-                    Divider(
-                      color: Colors.blueGrey,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Text(
-                            description != null
-                                ? description.toString()
-                                : "Loading",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            ),
-          )
+              SizedBox(
+                height: 5.0,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Weather()));
+                },
+                child: Card(
+                  elevation: 15.0,
+                  child: Container(
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              _currentAddress != null &&
+                                      _currentPosition != null
+                                  ? _currentAddress + ","
+                                  : "loading",
+                              style: TextStyle(fontWeight: FontWeight.w600),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              months[current_mon - 1].toString() +
+                                  " " +
+                                  date.toString() +
+                                  "  " +
+                                  time.toString(),
+                              style: TextStyle(fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 7.0,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              FontAwesomeIcons.cloudSunRain,
+                              size: 30,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              temp != null
+                                  ? temp.toString() + "52\u00B0C"
+                                  : "Loading",
+                              style: TextStyle(
+                                  fontSize: 40, fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
+                        Divider(
+                          color: Colors.blueGrey,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Text(
+                                description != null
+                                    ? description.toString()
+                                    : "Loading",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              )
+            ],
+          )),
         ],
-      ),
+      )),
 
       /*appBar: AppBar(
         title: Text('Fruit Doctor'),
