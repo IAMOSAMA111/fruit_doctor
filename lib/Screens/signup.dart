@@ -192,25 +192,25 @@ class _SignupState extends State<Signup> {
                       SizedBox(
                         height: 20,
                       ),
-                      ButtonTheme(
-                        buttonColor: secondary_Color,
-                        minWidth: size.width * 0.8,
-                        height: size.height * 0.05,
-                        child: RaisedButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30)),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => (Login())));
-                          },
-                          child: Text(
-                            'SIGN UP',
-                            style: TextStyle(color: Colors.white, fontSize: 15),
-                          ),
-                        ),
+                  ButtonTheme(
+                    buttonColor: secondary_Color,
+                    minWidth: size.width * 0.8,
+                    height: size.height * 0.05,
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30)),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => (Login())));
+                      },
+                      child: Text(
+                        'SIGN UP',
+                        style: TextStyle(color: Colors.white, fontSize: 15),
                       ),
+                    ),
+                  ),
                       SizedBox(height: 40),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
