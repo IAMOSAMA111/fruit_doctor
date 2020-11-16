@@ -1,16 +1,25 @@
+//import 'dart:html';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_doctor/Screens/home.dart';
+import 'package:flutter_doctor/Screens/profile.dart';
 import 'package:flutter_doctor/utilities/constants.dart';
 
 class BottomNavigation extends StatefulWidget {
+  Map up;
   static const String id = 'BottomNavigation';
+
   @override
   _BottomNavigationState createState() => _BottomNavigationState();
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
   int _selectedPage = 0;
+  String name;
+
   final _pageOption = [
     Home(),
     Text(
@@ -21,10 +30,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
       "Todoist",
       style: TextStyle(fontSize: 20),
     ),
-    Text(
-      "Profile",
-      style: TextStyle(fontSize: 20),
-    )
+    Profile()
   ];
 
   @override
@@ -47,7 +53,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 icon: FaIcon(
                   FontAwesomeIcons.home,
                 ),
-                title: Text("Home"),
+                title: Text('Home'),
               ),
               BottomNavigationBarItem(
                 icon: FaIcon(FontAwesomeIcons.comment),
