@@ -3,14 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_doctor/Screens/signup.dart';
 import 'package:flutter_doctor/utilities/constants.dart';
+import 'package:flutter_doctor/utilities/auth.dart' as auth;
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_doctor/Screens/login.dart';
 import 'package:animated_widgets/animated_widgets.dart';
 
-//Sample code yet
-class Welcome extends StatelessWidget {
+class Welcome extends StatefulWidget {
   static const String id = 'Welcome';
+  @override
+  _WelcomeState createState() => _WelcomeState();
+}
 
+class _WelcomeState extends State<Welcome> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -118,15 +122,22 @@ class Welcome extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SvgPicture.asset(
-                              'assets/images/Components/with-fb.svg',
-                              height: size.height * 0.07),
+                          GestureDetector(
+                            onTap: () =>
+                                {auth.a.loginWithFB(context)}, //loginWithFB()
+                            child: SvgPicture.asset(
+                                'assets/images/Components/with-fb.svg',
+                                height: size.height * 0.07),
+                          ),
                           SizedBox(
                             width: 20,
                           ),
-                          SvgPicture.asset(
-                              'assets/images/Components/with-google.svg',
-                              height: size.height * 0.07),
+                          GestureDetector(
+                            onTap: () => {auth.a.logout()}, //globals.logout()
+                            child: SvgPicture.asset(
+                                'assets/images/Components/with-google.svg',
+                                height: size.height * 0.07),
+                          ),
                         ],
                       ),
                       Row(
@@ -134,27 +145,6 @@ class Welcome extends StatelessWidget {
                           SvgPicture.asset(
                               'assets/images/Components/bottom-left.svg',
                               height: size.height * 0.15),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              /*TranslationAnimatedWidget(
-                                enabled: true,
-                                delay: Duration(milliseconds: 100),
-                                duration: Duration(minutes: 1),
-                                values: [
-                                  Offset(300, 0),
-                                  Offset(230, 50),
-                                  Offset(120, 0),
-                                  Offset(60, 50),
-                                  Offset(0, 0)
-                                ],
-                                child: SvgPicture.asset(
-                                    'assets/images/Components/bottom-right.svg',
-                                    height: size.height * 0.04),
-                              ),*/
-                              SizedBox(height: 70)
-                            ],
-                          )
                         ],
                       )
                     ],
