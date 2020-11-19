@@ -133,7 +133,9 @@ class _WelcomeState extends State<Welcome> {
                             width: 20,
                           ),
                           GestureDetector(
-                            onTap: () => {auth.a.logout()}, //globals.logout()
+                            onTap: () => {
+                              auth.a.loginWithGoogle(context)
+                            }, //globals.logout()
                             child: SvgPicture.asset(
                                 'assets/images/Components/with-google.svg',
                                 height: size.height * 0.07),
