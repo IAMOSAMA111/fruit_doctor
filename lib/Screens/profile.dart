@@ -24,21 +24,21 @@ class _ProfileState extends State<Profile> {
                     children: [
                       Image.network(
                           auth.a.isLoggedIn
-                              ? auth.a.userProfile['picture']['data']['url']
+                              ? auth.a.userProfile[auth.E.photoURL.index] != null? auth.a.userProfile[auth.E.photoURL.index] : 'https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png'
                               : 'https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png',
                           height: 50,
                           width: 50),
                       SizedBox(height: 10),
                       Text(
                           auth.a.isLoggedIn
-                              ? auth.a.userProfile['name']
+                              ? auth.a.userProfile[auth.E.username.index]
                               : 'Anonymous',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 16)),
                       SizedBox(height: 10),
                       Text(
                         auth.a.isLoggedIn
-                            ? auth.a.userProfile['email']
+                            ? auth.a.userProfile[auth.E.email.index] != null? auth.a.userProfile[auth.E.email.index] : 'you@somewhere.com'
                             : 'you@somewhere.com',
                         style: TextStyle(
                             fontStyle: FontStyle.italic, fontSize: 16),
