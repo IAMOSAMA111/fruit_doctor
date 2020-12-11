@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_doctor/Screens/home.dart';
 import 'package:flutter_doctor/Screens/profile.dart';
 import 'package:flutter_doctor/utilities/constants.dart';
+import 'package:flutter_doctor/Screens/todoist.dart';
 
 class BottomNavigation extends StatefulWidget {
   Map up;
@@ -22,6 +23,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
   final _pageOption = [
     Home(),
+    Todoist(),
     Text(
       "Community",
       style: TextStyle(fontSize: 20),
@@ -37,7 +39,13 @@ class _BottomNavigationState extends State<BottomNavigation> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: SafeArea(
+
         child: Scaffold(
+          appBar: AppBar(
+            title: Text('Fruit Doctor'),
+            centerTitle: true,
+            backgroundColor: Color(0xff45736A),
+          ),
           body: _pageOption[_selectedPage],
           bottomNavigationBar: BottomNavigationBar(
             selectedItemColor: primary_Color,
