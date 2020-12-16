@@ -1,12 +1,18 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_doctor/Screens/signup.dart';
+import 'package:flutter_doctor/Screens/welcome.dart';
 import 'package:flutter_doctor/Screens/forgotPassword.dart';
 import 'package:flutter_doctor/Screens/bottomnav.dart';
 import 'package:flutter_doctor/utilities/constants.dart';
+import 'package:flutter_doctor/utilities/auth.dart' as auth;
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:animated_widgets/animated_widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:form_field_validator/form_field_validator.dart';
+import 'package:wc_form_validators/wc_form_validators.dart';
 
 class Login extends StatefulWidget {
   static const String id = 'Login';
@@ -17,14 +23,18 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   String _email;
-  String _password;
+  String _password = '';
+  var token;
+
+  final _formEmail = GlobalKey<FormState>();
+  final _formPassword = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
     return SafeArea(
         child: Scaffold(
+            resizeToAvoidBottomInset: false,
             body: Container(
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
@@ -36,7 +46,7 @@ class _LoginState extends State<Login> {
                           'assets/images/Components/upper-left.svg',
                           height: size.height * 0.1),
                       SizedBox(
-                        width: 105,
+                        width: 102,
                       ),
                       Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -84,54 +94,99 @@ class _LoginState extends State<Login> {
                         decoration: loginBoxDecorationStyle,
                         height: 50.0,
                         width: MediaQuery.of(context).size.width * 0.8,
-                        child: TextField(
-                          keyboardType: TextInputType.emailAddress,
-                          textAlignVertical: TextAlignVertical.center,
-                          onChanged: (value) {
-                            this._email = value;
-                          },
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'CM Sans Serif',
-                          ),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            prefixIcon: Icon(
-                              Icons.alternate_email,
-                              color: placeholderColor,
-                            ),
-                            hintText: 'Enter your Email',
-                            hintStyle: placeholderStyle,
-                          ),
-                        ),
+                        child: Form(
+                            key: _formEmail,
+                            autovalidate: true,
+                            child: TextFormField(
+                              validator: Validators.compose([
+                                Validators.required('Email is required'),
+                                Validators.email('Invalid email address'),
+                              ]),
+                              keyboardType: TextInputType.emailAddress,
+                              textAlignVertical: TextAlignVertical.center,
+                              textAlign: TextAlign.left,
+                              onChanged: (value) {
+                                this._email = value;
+                              },
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'CM Sans Serif',
+                              ),
+                              decoration: InputDecoration(
+                                errorMaxLines: 1,
+                                isDense: true,
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
+                                errorStyle: TextStyle(
+                                  backgroundColor: Colors.red,
+                                  color: Colors.white,
+                                  height: 0,
+                                ),
+                                helperText: '  ',
+                                helperStyle: TextStyle(fontSize: 0, height: 0),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                  ),
+                                ),
+                                prefixIcon: Icon(
+                                  Icons.alternate_email,
+                                  color: placeholderColor,
+                                ),
+                                hintText: 'Email Address',
+                                hintStyle: placeholderStyle,
+                              ),
+                            )),
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 12),
                       Container(
-                        alignment: Alignment.centerLeft,
-                        decoration: loginBoxDecorationStyle,
-                        height: 50.0,
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        child: TextField(
-                          textAlignVertical: TextAlignVertical.center,
-                          obscureText: true,
-                          onChanged: (value) {
-                            this._password = value;
-                          },
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'CM Sans Serif',
-                          ),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            prefixIcon: Icon(
-                              Icons.lock,
-                              color: placeholderColor,
+                          alignment: Alignment.centerLeft,
+                          decoration: loginBoxDecorationStyle,
+                          height: 50.0,
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          child: Form(
+                            key: _formPassword,
+                            autovalidate: true,
+                            child: TextFormField(
+                              validator:
+                                  Validators.required('Password is required'),
+                              textAlignVertical: TextAlignVertical.center,
+                              obscureText: true,
+                              onChanged: (value) {
+                                this._password = value;
+                              },
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'CM Sans Serif',
+                              ),
+                              decoration: InputDecoration(
+                                errorMaxLines: 1,
+                                isDense: true,
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
+                                errorStyle: TextStyle(
+                                  backgroundColor: Colors.red,
+                                  color: Colors.white,
+                                  height: 0,
+                                ),
+                                helperText: '  ',
+                                helperStyle: TextStyle(fontSize: 0, height: 0),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                  ),
+                                ),
+                                prefixIcon: Icon(
+                                  Icons.lock,
+                                  color: placeholderColor,
+                                ),
+                                hintText: 'Password',
+                                hintStyle: placeholderStyle,
+                              ),
                             ),
-                            hintText: 'Enter your Password',
-                            hintStyle: placeholderStyle,
-                          ),
-                        ),
-                      ),
+                          )),
                       SizedBox(
                         height: 20,
                       ),
@@ -143,11 +198,58 @@ class _LoginState extends State<Login> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30)),
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        (BottomNavigation())));
+                            if (_formEmail.currentState.validate() &&
+                                _formPassword.currentState.validate()) {
+                              auth.a
+                                  .loginWithLocalAccount(_email, _password)
+                                  .then((val) {
+                                if (val.data['success']) {
+                                  auth.a.isLoggedIn = true;
+                                  token = val.data['token'];
+                                  auth.a.getinfo(token).then((info) {
+                                    auth.a.userProfile[auth.E.username.index] =
+                                        info.data['name'];
+                                    auth.a.userProfile[auth.E.email.index] =
+                                        info.data['email'];
+                                    auth.a.userProfile[auth.E.photoURL.index] =
+                                        null;
+                                  });
+                                  Fluttertoast.showToast(
+                                      msg: 'Authenticated',
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,
+                                      backgroundColor: Colors.green,
+                                      textColor: Colors.white,
+                                      fontSize: 16.0);
+                                  //Popping all the previous pages because we dont want to take the user back to login page if presses the back button
+                                  Navigator.of(context)
+                                      .popUntil((route) => route.isFirst);
+                                  Navigator.pop(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => (Welcome())));
+                                  //taking to home
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              (BottomNavigation())));
+                                }
+                              });
+                            } else {
+                              var errMsg;
+                              if (!_formEmail.currentState.validate())
+                                errMsg = "Enter a valid Email Address";
+                              else
+                                errMsg = "You missed the password";
+                              Fluttertoast.showToast(
+                                  msg: errMsg,
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.BOTTOM,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0);
+                            }
                           },
                           child: Text(
                             'LOGIN',
