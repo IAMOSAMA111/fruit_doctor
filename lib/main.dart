@@ -6,6 +6,7 @@ import 'package:flutter_doctor/Screens/welcome.dart';
 import 'package:flutter_doctor/Screens/home.dart';
 import 'package:flutter_doctor/Screens/weather.dart';
 import 'package:flutter_doctor/utilities/constants.dart';
+import 'package:flutter_doctor/utilities/auth.dart' as auth;
 import 'routes.dart';
 
 void main() {
@@ -19,7 +20,7 @@ class FruitDoctor extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Fruit Doctor',
       theme: fruitDoctorThemeData,
-      initialRoute: Welcome.id,
+      initialRoute: auth.a.isLoggedIn ? BottomNavigation.id : Welcome.id,
       routes: Routes.ROUTE,
     );
   }
