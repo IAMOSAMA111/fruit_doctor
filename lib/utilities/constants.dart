@@ -16,6 +16,7 @@ final kMapsGreyColor = Color(0xFFf5f5f5);
 final background_Color = Color(0xffffffff);
 final primary_Color = Color(0xff27AE5A);
 final secondary_Color = Colors.deepOrangeAccent;
+final tertiary_Color = Colors.black.withOpacity(0.6);
 final placeholderColor = Color(0xffffffff);
 final textfieldbackgroundColor = Color(0xff000000);
 
@@ -37,6 +38,7 @@ final fruitDoctorThemeData = ThemeData(
 final loginBoxDecorationStyle = BoxDecoration(
   color: textfieldbackgroundColor.withOpacity(0.5),
   borderRadius: BorderRadius.circular(30.0),
+  border: Border.all(color: Colors.white),
   /*
   boxShadow: [
     BoxShadow(
