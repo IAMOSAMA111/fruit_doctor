@@ -5,6 +5,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_doctor/Screens/login.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:animated_widgets/animated_widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_doctor/utilities/auth.dart' as auth;
+import 'package:wc_form_validators/wc_form_validators.dart';
+import 'package:form_field_validator/form_field_validator.dart';
+import 'package:email_validator/email_validator.dart' as eValidator;
 
 class Signup extends StatefulWidget {
   static const String id = 'Signup';
@@ -15,8 +20,20 @@ class Signup extends StatefulWidget {
 class _SignupState extends State<Signup> {
   String name;
   String email;
-  String password;
-  String confirmPassword;
+  String password = '';
+  String confirmPassword = '';
+
+  final _formName = GlobalKey<FormState>();
+  final _formPassword = GlobalKey<FormState>();
+  final _formEmail = GlobalKey<FormState>();
+  final _formConfirmPassword = GlobalKey<FormState>();
+
+  final passwordValidator = MultiValidator([
+    RequiredValidator(errorText: ''),
+    MinLengthValidator(8, errorText: 'password must be at least 8 digits long'),
+    PatternValidator(r'(?=.*?[#?!@$%^&*-])',
+        errorText: 'password must have at least one special character'),
+  ]);
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +41,7 @@ class _SignupState extends State<Signup> {
 
     return SafeArea(
         child: Scaffold(
+            resizeToAvoidBottomInset: false,
             body: Container(
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
@@ -79,138 +97,260 @@ class _SignupState extends State<Signup> {
                       ),
                       SizedBox(height: 25),
                       Container(
-                        alignment: Alignment.centerLeft,
-                        decoration: loginBoxDecorationStyle,
-                        height: 45.0,
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        child: TextField(
-                          keyboardType: TextInputType.name,
-                          textAlignVertical: TextAlignVertical.center,
-                          onChanged: (value) {
-                            this.name = value;
-                          },
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'CM Sans Serif',
-                          ),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            prefixIcon: Icon(
-                              Icons.person,
-                              color: placeholderColor,
-                            ),
-                            hintText: 'Enter your Full Name',
-                            hintStyle: placeholderStyle,
-                          ),
-                        ),
-                      ),
+                          alignment: Alignment.centerLeft,
+                          decoration: loginBoxDecorationStyle,
+                          height: 45.0,
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          child: Form(
+                              key: _formName,
+                              autovalidate: true,
+                              child: TextFormField(
+                                validator:
+                                    Validators.required("Name is required"),
+                                keyboardType: TextInputType.emailAddress,
+                                textAlignVertical: TextAlignVertical.center,
+                                textAlign: TextAlign.left,
+                                onChanged: (value) {
+                                  this.email = value;
+                                },
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'CM Sans Serif',
+                                ),
+                                decoration: InputDecoration(
+                                  errorMaxLines: 1,
+                                  isDense: true,
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 10),
+                                  errorStyle: TextStyle(
+                                    backgroundColor: Colors.red,
+                                    color: Colors.white,
+                                    height: 0,
+                                  ),
+                                  helperText: '  ',
+                                  helperStyle:
+                                      TextStyle(fontSize: 0, height: 0),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                    ),
+                                  ),
+                                  prefixIcon: Icon(
+                                    Icons.person,
+                                    color: placeholderColor,
+                                  ),
+                                  hintText: "Full Name",
+                                  hintStyle: placeholderStyle,
+                                ),
+                              ))),
                       SizedBox(
-                        height: 10,
+                        height: 12,
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
                         decoration: loginBoxDecorationStyle,
                         height: 45.0,
                         width: MediaQuery.of(context).size.width * 0.8,
-                        child: TextField(
-                          keyboardType: TextInputType.emailAddress,
-                          textAlignVertical: TextAlignVertical.center,
-                          onChanged: (value) {
-                            this.email = value;
-                          },
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'CM Sans Serif',
-                          ),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            prefixIcon: Icon(
-                              Icons.alternate_email,
-                              color: placeholderColor,
-                            ),
-                            hintText: 'Enter your Email',
-                            hintStyle: placeholderStyle,
-                          ),
-                        ),
+                        child: Form(
+                            key: _formEmail,
+                            autovalidate: true,
+                            child: TextFormField(
+                              validator: Validators.compose([
+                                Validators.required('Email is required'),
+                                Validators.email('Invalid email address'),
+                              ]),
+                              keyboardType: TextInputType.emailAddress,
+                              textAlignVertical: TextAlignVertical.center,
+                              textAlign: TextAlign.left,
+                              onChanged: (value) {
+                                this.email = value;
+                              },
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'CM Sans Serif',
+                              ),
+                              decoration: InputDecoration(
+                                errorMaxLines: 1,
+                                isDense: true,
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
+                                errorStyle: TextStyle(
+                                  backgroundColor: Colors.red,
+                                  color: Colors.white,
+                                  height: 0,
+                                ),
+                                helperText: '  ',
+                                helperStyle: TextStyle(fontSize: 0, height: 0),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                  ),
+                                ),
+                                prefixIcon: Icon(
+                                  Icons.alternate_email,
+                                  color: placeholderColor,
+                                ),
+                                hintText: 'Email Address',
+                                hintStyle: placeholderStyle,
+                              ),
+                            )),
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 12),
                       Container(
-                        alignment: Alignment.centerLeft,
-                        decoration: loginBoxDecorationStyle,
-                        height: 45.0,
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        child: TextField(
-                          textAlignVertical: TextAlignVertical.center,
-                          obscureText: true,
-                          onChanged: (value) {
-                            this.password = value;
-                          },
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'CM Sans Serif',
-                          ),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            prefixIcon: Icon(
-                              Icons.lock,
-                              color: placeholderColor,
+                          alignment: Alignment.centerLeft,
+                          decoration: loginBoxDecorationStyle,
+                          height: 45.0,
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          child: Form(
+                            key: _formPassword,
+                            autovalidate: true,
+                            child: TextFormField(
+                              validator: passwordValidator,
+                              textAlignVertical: TextAlignVertical.center,
+                              obscureText: true,
+                              onChanged: (value) {
+                                this.password = value;
+                              },
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'CM Sans Serif',
+                              ),
+                              decoration: InputDecoration(
+                                errorMaxLines: 1,
+                                isDense: true,
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
+                                errorStyle: TextStyle(
+                                    backgroundColor: Colors.red,
+                                    color: Colors.white,
+                                    height: 0,
+                                    decorationColor: Colors.green),
+                                helperText: '  ',
+                                helperStyle: TextStyle(fontSize: 0, height: 0),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                  ),
+                                ),
+                                prefixIcon: Icon(
+                                  Icons.lock,
+                                  color: placeholderColor,
+                                ),
+                                hintText: 'Password',
+                                hintStyle: placeholderStyle,
+                              ),
                             ),
-                            hintText: 'Enter your Password',
-                            hintStyle: placeholderStyle,
-                          ),
-                        ),
-                      ),
+                          )),
                       SizedBox(
-                        height: 10,
+                        height: 12,
                       ),
                       Container(
-                        alignment: Alignment.centerLeft,
-                        decoration: loginBoxDecorationStyle,
-                        height: 45.0,
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        child: TextField(
-                          textAlignVertical: TextAlignVertical.center,
-                          obscureText: true,
-                          onChanged: (value) {
-                            this.confirmPassword = value;
-                          },
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'CM Sans Serif',
-                          ),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            prefixIcon: Icon(
-                              Icons.lock,
-                              color: placeholderColor,
+                          alignment: Alignment.centerLeft,
+                          decoration: loginBoxDecorationStyle,
+                          height: 45.0,
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          child: Form(
+                            key: _formConfirmPassword,
+                            autovalidate: true,
+                            child: TextFormField(
+                              validator: (value) => MatchValidator(
+                                      errorText: 'Passwords dont match')
+                                  .validateMatch(value, password),
+                              textAlignVertical: TextAlignVertical.center,
+                              obscureText: true,
+                              onChanged: (value) {
+                                this.confirmPassword = value;
+                              },
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'CM Sans Serif',
+                              ),
+                              decoration: InputDecoration(
+                                errorMaxLines: 1,
+                                isDense: true,
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
+                                errorStyle: TextStyle(
+                                  backgroundColor: Colors.red,
+                                  color: Colors.white,
+                                  height: 0,
+                                ),
+                                helperText: '  ',
+                                helperStyle: TextStyle(fontSize: 0, height: 0),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                  ),
+                                ),
+                                prefixIcon: Icon(
+                                  Icons.lock,
+                                  color: placeholderColor,
+                                ),
+                                hintText: 'Confirm Password',
+                                hintStyle: placeholderStyle,
+                              ),
                             ),
-                            hintText: 'Confirm Password',
-                            hintStyle: placeholderStyle,
-                          ),
-                        ),
-                      ),
+                          )),
                       SizedBox(
                         height: 20,
                       ),
-                  ButtonTheme(
-                    buttonColor: secondary_Color,
-                    minWidth: size.width * 0.8,
-                    height: size.height * 0.05,
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => (Login())));
-                      },
-                      child: Text(
-                        'SIGN UP',
-                        style: TextStyle(color: Colors.white, fontSize: 15),
+                      ButtonTheme(
+                        buttonColor: secondary_Color,
+                        minWidth: size.width * 0.8,
+                        height: size.height * 0.05,
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30)),
+                          onPressed: () {
+                            if (_formPassword.currentState.validate() &&
+                                _formEmail.currentState.validate() &&
+                                _formName.currentState.validate() &&
+                                _formConfirmPassword.currentState.validate()) {
+                              auth.a
+                                  .addNewUser(email, password, name)
+                                  .then((val) {
+                                Fluttertoast.showToast(
+                                    msg: 'Signed Up Successfully!',
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.BOTTOM,
+                                    backgroundColor: Colors.green,
+                                    textColor: Colors.white,
+                                    fontSize: 16.0);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => (Login())));
+                              });
+                            } else {
+                              var errMsg;
+                              if (!_formName.currentState.validate())
+                                errMsg = "Your Name is Required";
+                              else if (!_formEmail.currentState.validate())
+                                errMsg = "Please enter a valid Email Address";
+                              else if (!_formPassword.currentState.validate())
+                                errMsg = "Please enter a valid Password";
+                              else if (!_formConfirmPassword.currentState
+                                  .validate())
+                                errMsg = "Please confirm your password";
+                              Fluttertoast.showToast(
+                                  msg: errMsg,
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.BOTTOM,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0);
+                            }
+                          },
+                          child: Text(
+                            'SIGN UP',
+                            style: TextStyle(color: Colors.white, fontSize: 15),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
                       SizedBox(height: 40),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
