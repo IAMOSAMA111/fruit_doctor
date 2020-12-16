@@ -18,139 +18,162 @@ class _WelcomeState extends State<Welcome> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
+    Size socialLogin = MediaQuery.of(context).size;
+    Color c = Colors.blue;
     return SafeArea(
         child: Scaffold(
             body: Container(
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
-                child: Column(children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SvgPicture.asset(
-                          'assets/images/Components/upper-left.svg',
-                          height: size.height * 0.1),
-                      SizedBox(
-                        width: 88,
-                      ),
-                      Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(height: 50),
-                            Text(
-                              'WELCOME',
-                              style: topHeadingStyle,
+                child: Stack(children: [
+                  Column(children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SvgPicture.asset(
+                            'assets/images/Components/upper-left.svg',
+                            //color: Color(0xffB6ED96),
+                            height: size.height * 0.11),
+                        SizedBox(
+                          width: 85,
+                        ),
+                        Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(height: 50),
+                              Text(
+                                'WELCOME',
+                                style: topHeadingStyle,
+                              ),
+                            ]),
+                        SizedBox(
+                          width: 80,
+                        ),
+                        Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(height: 50),
+                              RotationAnimatedWidget.tween(
+                                duration: Duration(minutes: 3),
+                                delay: Duration(milliseconds: 500),
+                                enabled: true,
+                                rotationDisabled: Rotation.deg(z: -3600),
+                                rotationEnabled: Rotation.deg(z: 0),
+                                child: SvgPicture.asset(
+                                    'assets/images/Components/upper-right.svg',
+                                    height: size.height * 0.035),
+                              )
+                            ]),
+                        SizedBox(height: 160),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Container(
+                          //color: primary_Color.withOpacity(0.3),
+                          //margin: EdgeInsets.symmetric(horizontal: size.width * 0.1),
+                          //padding: EdgeInsets.all(10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              //Image.asset('assets/images/man-with-plant.gif',
+                              //height: size.height * 0.3),
+                              SvgPicture.asset(
+                                  'assets/images/Components/man-with-plant.svg',
+                                  height: size.height * 0.28),
+                              SizedBox(
+                                width: 40,
+                              )
+                            ],
+                          ),
+                        ),
+
+                        SizedBox(height: 80),
+                        ButtonTheme(
+                          buttonColor: primary_Color,
+                          minWidth: size.width * 0.8,
+                          height: size.height * 0.05,
+                          child: RaisedButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30)),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => (Login())));
+                            },
+                            child: Text(
+                              'LOGIN',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 15),
                             ),
-                          ]),
-                      SizedBox(
-                        width: 80,
-                      ),
-                      Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        ButtonTheme(
+                          buttonColor: secondary_Color,
+                          minWidth: size.width * 0.8,
+                          height: size.height * 0.05,
+                          child: RaisedButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30)),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => (Signup())));
+                            },
+                            child: Text(
+                              'SIGNUP',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 15),
+                            ),
+                          ),
+                        ),
+                        OrDivider(),
+                        SizedBox(height: 0),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(height: 50),
-                            RotationAnimatedWidget.tween(
-                              duration: Duration(minutes: 3),
-                              delay: Duration(milliseconds: 500),
-                              enabled: true,
-                              rotationDisabled: Rotation.deg(z: -3600),
-                              rotationEnabled: Rotation.deg(z: 0),
+                            GestureDetector(
+                              onTap: () => {
+                                this.setState(() {
+                                  auth.a.loginWithFB(context);
+                                })
+                              },
                               child: SvgPicture.asset(
-                                  'assets/images/Components/upper-right.svg',
-                                  height: size.height * 0.04),
-                            )
-                          ]),
-                      SizedBox(height: 150),
-                    ],
+                                  'assets/images/Components/with-fb.svg',
+                                  //color: Color(0xff3b5998),
+                                  height: socialLogin.height * 0.065),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            GestureDetector(
+                              onTap: () => {auth.a.loginWithGoogle(context)},
+                              child: SvgPicture.asset(
+                                  'assets/images/Components/with-google.svg',
+                                  //color: Color(0xffDB4437),
+                                  height: size.height * 0.065),
+                            ),
+                          ],
+                        ),
+                        //Row(
+                        //children: [
+
+                        //],
+                        //)
+                      ],
+                    ),
+                  ]),
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    child: SvgPicture.asset(
+                        'assets/images/Components/bottom-left1.svg',
+                        color: secondary_Color.withOpacity(0.6),
+                        height: size.height * 0.15),
                   ),
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(
-                              'assets/images/Components/man-with-plant.svg',
-                              height: size.height * 0.3),
-                          SizedBox(
-                            width: 20,
-                          )
-                        ],
-                      ),
-                      SizedBox(height: 20),
-                      ButtonTheme(
-                        buttonColor: primary_Color,
-                        minWidth: size.width * 0.8,
-                        height: size.height * 0.05,
-                        child: RaisedButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30)),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => (Login())));
-                          },
-                          child: Text(
-                            'LOGIN',
-                            style: TextStyle(color: Colors.white, fontSize: 15),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      ButtonTheme(
-                        buttonColor: secondary_Color,
-                        minWidth: size.width * 0.8,
-                        height: size.height * 0.05,
-                        child: RaisedButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30)),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => (Signup())));
-                          },
-                          child: Text(
-                            'SIGNUP',
-                            style: TextStyle(color: Colors.white, fontSize: 15),
-                          ),
-                        ),
-                      ),
-                      OrDivider(),
-                      SizedBox(height: 0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          GestureDetector(
-                            onTap: () =>
-                                {auth.a.loginWithFB(context)}, //loginWithFB()
-                            child: SvgPicture.asset(
-                                'assets/images/Components/with-fb.svg',
-                                height: size.height * 0.07),
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          GestureDetector(
-                            onTap: () => {
-                              auth.a.loginWithGoogle(context)
-                            }, //globals.logout()
-                            child: SvgPicture.asset(
-                                'assets/images/Components/with-google.svg',
-                                height: size.height * 0.07),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          SvgPicture.asset(
-                              'assets/images/Components/bottom-left.svg',
-                              height: size.height * 0.15),
-                        ],
-                      )
-                    ],
-                  )
                 ]))));
   }
 }
