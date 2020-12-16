@@ -17,5 +17,6 @@ class Routes {
     Weather.id: (context) => Weather(),
     BottomNavigation.id: (context) => BottomNavigation(),
   };
+
   static Map<String, WidgetBuilder> get ROUTE => _defaultRoute;
 }
