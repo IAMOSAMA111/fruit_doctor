@@ -71,7 +71,7 @@ class _WeatherState extends State<Weather> {
                     ),
 
                     Text(
-                      temp != null ? temp.toString()+"52\u00B0": "Loading",
+                      temp != null ? temp.toString()+"\u00B0": "Loading",
                       style:TextStyle(
                         color: Colors.white,
                         fontSize: 40.0,
@@ -106,7 +106,7 @@ class _WeatherState extends State<Weather> {
                         ListTile(
                           leading:FaIcon(FontAwesomeIcons.thermometerHalf) ,
                           title: Text("Temperature"),
-                          trailing: Text(temp != null ? temp.toString()+"52\u00B0": "Loading",),
+                          trailing: Text(temp != null ? temp.toString()+"\u00B0": "Loading",),
                         ),
 
                         ListTile(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_doctor/Screens/bottomnav.dart';
 import 'package:flutter_doctor/Screens/login.dart';
+import 'package:flutter_doctor/Screens/note_home.dart';
 import 'package:flutter_doctor/Screens/signup.dart';
+import 'package:flutter_doctor/Screens/todoist.dart';
 import 'package:flutter_doctor/Screens/welcome.dart';
 import 'package:flutter_doctor/Screens/home.dart';
 import 'package:flutter_doctor/Screens/weather.dart';
