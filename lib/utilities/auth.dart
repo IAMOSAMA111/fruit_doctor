@@ -7,26 +7,66 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as JSON;
 import 'package:flutter_doctor/Screens/bottomnav.dart';
+import 'package:flutter_doctor/Screens/welcome.dart';
+import 'package:dio/dio.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-_Auth a = _Auth.getInstance();
-
+Auth a = Auth.getInstance();
 enum E { username, email, photoURL }
 
-class _Auth {
-  static _Auth _instance = new _Auth();
+class Auth {
+  Dio dio = new Dio();
+  static Auth _instance;
   bool isLoggedIn = false;
   List<String> userProfile = List<String>(3);
   Map userPrf;
   static final facebookLogin = FacebookLogin();
   GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
 
-  _Auth() {}
+  Auth._() {}
 
-  static _Auth getInstance() {
+  static Auth getInstance() {
     if (_instance == null) {
-      _instance = new _Auth();
+      _instance = new Auth._();
     }
     return _instance;
+  }
+
+  loginWithLocalAccount(email, password) async {
+    try {
+      return await dio.post('https://fruitdoctor.herokuapp.com/authenticate',
+          data: {"email": email, "password": password},
+          options: Options(contentType: Headers.formUrlEncodedContentType));
+    } on DioError catch (e) {
+      Fluttertoast.showToast(
+          msg: e.response.data['msg'],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
+  }
+
+  addNewUser(email, password, name) async {
+    try {
+      return await dio.post('https://fruitdoctor.herokuapp.com/adduser',
+          data: {"email": email, "name": name, "password": password},
+          options: Options(contentType: Headers.formUrlEncodedContentType));
+    } on DioError catch (e) {
+      Fluttertoast.showToast(
+          msg: e.response.data['msg'],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
+  }
+
+  getinfo(token) async {
+    dio.options.headers['Authorization'] = 'Bearer $token';
+    return await dio.get('https://fruitdoctor.herokuapp.com/getinfo');
   }
 
   loginWithFB(BuildContext context) async {
@@ -80,16 +120,11 @@ class _Auth {
     }
   }
 
-/*
-  _logout(){
-    _googleSignIn.signOut();
-    setState(() {
-      _isLoggedIn = false;
-    });
-  }
-  */
-
   takeToHome(BuildContext context) {
+    //Popping all the previous pages because we dont want to take the user back to login page if presses the back button
+    Navigator.of(context).popUntil((route) => route.isFirst);
+    Navigator.pop(
+        context, MaterialPageRoute(builder: (context) => (Welcome())));
     Navigator.push(
         context,
         MaterialPageRoute(
