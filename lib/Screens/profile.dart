@@ -6,7 +6,6 @@ import 'package:flutter_doctor/Screens/welcome.dart';
 
 class Profile extends StatefulWidget {
   static const String id = 'Profile';
-
   @override
   _ProfileState createState() => _ProfileState();
 }
@@ -24,7 +23,10 @@ class _ProfileState extends State<Profile> {
                     children: [
                       Image.network(
                           auth.a.isLoggedIn
-                              ? auth.a.userProfile[auth.E.photoURL.index] != null? auth.a.userProfile[auth.E.photoURL.index] : 'https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png'
+                              ? auth.a.userProfile[auth.E.photoURL.index] !=
+                                      null
+                                  ? auth.a.userProfile[auth.E.photoURL.index]
+                                  : 'https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png'
                               : 'https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png',
                           height: 50,
                           width: 50),
@@ -38,7 +40,9 @@ class _ProfileState extends State<Profile> {
                       SizedBox(height: 10),
                       Text(
                         auth.a.isLoggedIn
-                            ? auth.a.userProfile[auth.E.email.index] != null? auth.a.userProfile[auth.E.email.index] : 'you@somewhere.com'
+                            ? auth.a.userProfile[auth.E.email.index] != null
+                                ? auth.a.userProfile[auth.E.email.index]
+                                : 'you@somewhere.com'
                             : 'you@somewhere.com',
                         style: TextStyle(
                             fontStyle: FontStyle.italic, fontSize: 16),
