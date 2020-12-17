@@ -111,7 +111,7 @@ class _SignupState extends State<Signup> {
                                 textAlignVertical: TextAlignVertical.center,
                                 textAlign: TextAlign.left,
                                 onChanged: (value) {
-                                  this.email = value;
+                                  this.name = value;
                                 },
                                 style: TextStyle(
                                   color: Colors.white,
@@ -313,17 +313,27 @@ class _SignupState extends State<Signup> {
                               auth.a
                                   .addNewUser(email, password, name)
                                   .then((val) {
-                                Fluttertoast.showToast(
-                                    msg: 'Signed Up Successfully!',
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    gravity: ToastGravity.BOTTOM,
-                                    backgroundColor: Colors.green,
-                                    textColor: Colors.white,
-                                    fontSize: 16.0);
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => (Login())));
+                                if (val.data['success']) {
+                                  Fluttertoast.showToast(
+                                      msg: 'Signed Up Successfully!',
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,
+                                      backgroundColor: Colors.green,
+                                      textColor: Colors.white,
+                                      fontSize: 16.0);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => (Login())));
+                                } else {
+                                  Fluttertoast.showToast(
+                                      msg: val.data['msg'],
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,
+                                      backgroundColor: Colors.red,
+                                      textColor: Colors.white,
+                                      fontSize: 16.0);
+                                }
                               });
                             } else {
                               var errMsg;
