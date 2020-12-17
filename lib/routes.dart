@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'Screens/login.dart';
 import 'Screens/signup.dart';
@@ -20,8 +18,8 @@ class Routes {
     Home.id: (context) => Home(),
     Weather.id: (context) => Weather(),
     BottomNavigation.id: (context) => BottomNavigation(),
-    NoteHome.id :(context) => NoteHome(),
-    Todoist.id :(context)=>Todoist(),
+    NoteHome.id: (context) => NoteHome(),
+    Todoist.id: (context) => Todoist(),
   };
 
   static Map<String, WidgetBuilder> get ROUTE => _defaultRoute;
