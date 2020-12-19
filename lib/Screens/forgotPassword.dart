@@ -2,9 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_doctor/Screens/forgotPassword2.dart';
+import 'package:flutter_doctor/Screens/loader.dart';
 import 'package:flutter_doctor/utilities/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:animated_widgets/animated_widgets.dart';
+import 'package:wc_form_validators/wc_form_validators.dart';
+import 'package:form_field_validator/form_field_validator.dart';
+import 'package:email_validator/email_validator.dart' as eValidator;
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Forgot_Password extends StatefulWidget {
   static const String id = 'Forgot_Password';
@@ -15,13 +20,12 @@ class Forgot_Password extends StatefulWidget {
 
 class _Forgot_PasswordState extends State<Forgot_Password> {
   String email;
-  String code;
-  String password;
-  String confirmPassword;
-
+  final _formEmail = GlobalKey<FormState>();
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return SafeArea(
         child: Scaffold(
       body: Container(
@@ -83,28 +87,52 @@ class _Forgot_PasswordState extends State<Forgot_Password> {
                 Container(
                   alignment: Alignment.centerLeft,
                   decoration: loginBoxDecorationStyle,
-                  height: 50.0,
+                  height: 45.0,
                   width: MediaQuery.of(context).size.width * 0.8,
-                  child: TextField(
-                    keyboardType: TextInputType.emailAddress,
-                    textAlignVertical: TextAlignVertical.center,
-                    onChanged: (value) {
-                      this.email = value;
-                    },
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'CM Sans Serif',
-                    ),
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      prefixIcon: Icon(
-                        Icons.alternate_email,
-                        color: placeholderColor,
-                      ),
-                      hintText: 'Enter your Email',
-                      hintStyle: placeholderStyle,
-                    ),
-                  ),
+                  child: Form(
+                      key: _formEmail,
+                      autovalidate: true,
+                      child: TextFormField(
+                        validator: Validators.compose([
+                          Validators.required('Email is required'),
+                          Validators.email('Invalid email address'),
+                        ]),
+                        keyboardType: TextInputType.emailAddress,
+                        textAlignVertical: TextAlignVertical.center,
+                        textAlign: TextAlign.left,
+                        onChanged: (value) {
+                          this.email = value;
+                        },
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'CM Sans Serif',
+                        ),
+                        decoration: InputDecoration(
+                          errorMaxLines: 1,
+                          isDense: true,
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
+                          errorStyle: TextStyle(
+                            backgroundColor: Colors.red,
+                            color: Colors.white,
+                            height: 0,
+                          ),
+                          helperText: '  ',
+                          helperStyle: TextStyle(fontSize: 0, height: 0),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                            ),
+                          ),
+                          prefixIcon: Icon(
+                            Icons.alternate_email,
+                            color: placeholderColor,
+                          ),
+                          hintText: 'Email Address',
+                          hintStyle: placeholderStyle,
+                        ),
+                      )),
                 ),
                 SizedBox(
                   height: 15,
@@ -117,10 +145,21 @@ class _Forgot_PasswordState extends State<Forgot_Password> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30)),
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => (Forgot_Password2())));
+                      if (!_formEmail.currentState.validate()) {
+                        Fluttertoast.showToast(
+                            msg: "Please Enter a valid Email",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    (ForgotPassword2(email))));
+                      }
                     },
                     child: Text(
                       'Continue',
