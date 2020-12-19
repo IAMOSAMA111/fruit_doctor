@@ -1,5 +1,7 @@
 library fruit_doctor.auth;
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
@@ -10,7 +12,14 @@ import 'package:flutter_doctor/Screens/bottomnav.dart';
 import 'package:flutter_doctor/Screens/welcome.dart';
 import 'package:dio/dio.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+<<<<<<< Updated upstream
 import 'package:shared_preferences/shared_preferences.dart';
+=======
+import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server.dart';
+import 'package:flutter_mailer/flutter_mailer.dart';
+>>>>>>> Stashed changes
 
 Auth a = Auth.getInstance();
 enum E { username, email, photoURL }
@@ -24,6 +33,10 @@ class Auth {
   static final facebookLogin = FacebookLogin();
   GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
 
+  static int min = 100000; //min and max values act as your 6 digit range
+  static int max = 999999;
+  var randomizer = Random();
+  int code;
   Auth._() {}
 
   static Auth getInstance() {
@@ -31,6 +44,53 @@ class Auth {
       _instance = new Auth._();
     }
     return _instance;
+  }
+
+  generateCode() {
+    code = min + randomizer.nextInt(max - min);
+  }
+
+  updatePassword(email, password) async {
+    try {
+      return await dio.post('https://fruitdoctor.herokuapp.com/updatepassword',
+          data: {"email": email, "password": password},
+          options: Options(contentType: Headers.formUrlEncodedContentType));
+    } on DioError catch (e) {
+      Fluttertoast.showToast(
+          msg: e.response.data['msg'],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
+  }
+
+  sendMail(recipient, context) async {
+    generateCode();
+
+    try {
+      return await dio.post('https://fruitdoctor.herokuapp.com/sendmail',
+          data: {"email": recipient, "code": code},
+          options: Options(contentType: Headers.formUrlEncodedContentType));
+    } on DioError catch (e) {
+      Fluttertoast.showToast(
+          msg: e.response.data['msg'],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
+
+    // final Email email = Email(
+    //   body: 'Your 6-digit confirmation code: ' + code.toString(),
+    //   subject: 'Confirm Email',
+    //   recipients: [recipient],
+    //   isHTML: true,
+    // );
+
+    // FlutterEmailSender.send(email);
   }
 
   loginWithLocalAccount(email, password) async {
