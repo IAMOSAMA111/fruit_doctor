@@ -29,10 +29,10 @@ class _NoteHomeState extends State<NoteHome> {
         appBar: AppBar(
           title: Text('NOTES'),
           centerTitle: true,
-          backgroundColor:Colors.green,
+          backgroundColor:Color(0xff45736A)
         ),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.green,
+          backgroundColor: Color(0xff45736A),
           child: Icon(Icons.add),
           onPressed: () {
             setState(() => loading = true);

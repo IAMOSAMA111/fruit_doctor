@@ -23,15 +23,12 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
   final _pageOption = [
     Home(),
-    Todoist(),
+
     Text(
       "Community",
       style: TextStyle(fontSize: 20),
     ),
-    Text(
-      "Todoist",
-      style: TextStyle(fontSize: 20),
-    ),
+    Todoist(),
     Profile()
   ];
 

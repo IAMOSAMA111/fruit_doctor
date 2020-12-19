@@ -15,6 +15,7 @@ final kMapsGreyColor = Color(0xFFf5f5f5);
 //Theme Colors
 final background_Color = Color(0xffffffff);
 final primary_Color = Color(0xff27AE5A);
+final appbar_Color = Color(0xff45736A);
 final secondary_Color = Colors.deepOrangeAccent;
 final tertiary_Color = Colors.black.withOpacity(0.6);
 final placeholderColor = Color(0xffffffff);

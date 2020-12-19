@@ -3,6 +3,7 @@ import 'package:flutter_doctor/utilities/constants.dart';
 import 'package:flutter_doctor/utilities/auth.dart' as auth;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_doctor/Screens/welcome.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Profile extends StatefulWidget {
   static const String id = 'Profile';
@@ -53,8 +54,10 @@ class _ProfileState extends State<Profile> {
                           child: RaisedButton(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30)),
-                            onPressed: () {
+                            onPressed: () async {
                               auth.a.logout();
+                              SharedPreferences sharepref = await SharedPreferences.getInstance();
+                              sharepref.setBool("loggedin", false);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(

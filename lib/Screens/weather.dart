@@ -51,7 +51,7 @@ class _WeatherState extends State<Weather> {
               Container(
                 height: MediaQuery.of(context).size.height/3,
                 width: MediaQuery.of(context).size.width,
-                color: Colors.redAccent,
+                color: Color(0xff45736A),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

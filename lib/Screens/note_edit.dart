@@ -3,12 +3,10 @@ import 'package:flutter_doctor/Model/note.dart';
 import 'package:flutter_doctor/Widget/loading.dart';
 import 'package:flutter_doctor/Services/notedb.dart';
 
-
 class NoteEdit extends StatefulWidget {
-  static const String id ="NoteEdit";
+  static const String id = "NoteEdit";
   final Note note;
-  NoteEdit({ this.note });
-
+  NoteEdit({this.note});
 
   @override
   _NoteEditState createState() => _NoteEditState();
@@ -24,21 +22,19 @@ class _NoteEditState extends State<NoteEdit> {
     super.initState();
     title = new TextEditingController(text: 'Title');
     content = new TextEditingController(text: 'Hello');
-    if(widget.note.id != null) {
+    if (widget.note.id != null) {
       editmode = true;
       title.text = widget.note.title;
       content.text = widget.note.content;
     }
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(editmode? 'EDIT' : 'NEW'),
-        backgroundColor: Colors.green,
+        title: Text(editmode ? 'EDIT' : 'NEW'),
+        backgroundColor: Color(0xff45736A),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.save),
@@ -47,37 +43,51 @@ class _NoteEditState extends State<NoteEdit> {
               save();
             },
           ),
-          if(editmode) IconButton(
-            icon: Icon(Icons.delete),
-            onPressed: () {
-              setState(() => loading = true);
-              delete();
-            },
-          ),
+          if (editmode)
+            IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: () {
+                setState(() => loading = true);
+                delete();
+              },
+            ),
         ],
       ),
-      body: loading? Loading() : ListView(
-        padding: EdgeInsets.all(13.0),
-        children: <Widget>[
-          Text(now.day.toString()+"/"+now.month.toString()+"/"+now.year.toString()),
-          SizedBox(height: 7,),
-          TextField(controller: title,style: TextStyle( fontSize: 18, fontWeight: FontWeight.w600),),
-          SizedBox(height: 10.0),
-          TextField(
-            controller: content,
-            maxLines: 27,
-          ),
-        ],
-      ),
+      body: loading
+          ? Loading()
+          : ListView(
+              padding: EdgeInsets.all(13.0),
+              children: <Widget>[
+                Text(now.day.toString() +
+                    "/" +
+                    now.month.toString() +
+                    "/" +
+                    now.year.toString()),
+                SizedBox(
+                  height: 7,
+                ),
+                TextField(
+                  controller: title,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                ),
+                SizedBox(height: 10.0),
+                TextField(
+                  controller: content,
+                  maxLines: 27,
+                ),
+              ],
+            ),
     );
   }
 
   Future<void> save() async {
-    if(title.text != '') {
+    if (title.text != '') {
       widget.note.title = title.text;
       widget.note.content = content.text;
-      if(editmode) await DB().update(widget.note);
-      else await DB().add(widget.note);
+      if (editmode)
+        await DB().update(widget.note);
+      else
+        await DB().add(widget.note);
     }
     setState(() => loading = false);
   }

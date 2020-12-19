@@ -12,6 +12,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:animated_widgets/animated_widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
 
 class Login extends StatefulWidget {
@@ -202,7 +203,7 @@ class _LoginState extends State<Login> {
                                 _formPassword.currentState.validate()) {
                               auth.a
                                   .loginWithLocalAccount(_email, _password)
-                                  .then((val) {
+                                  .then((val) async {
                                 if (val.data['success']) {
                                   auth.a.isLoggedIn = true;
                                   token = val.data['token'];
@@ -222,6 +223,8 @@ class _LoginState extends State<Login> {
                                       textColor: Colors.white,
                                       fontSize: 16.0);
                                   //Popping all the previous pages because we dont want to take the user back to login page if presses the back button
+                                  SharedPreferences sharepref = await SharedPreferences.getInstance();
+                                  sharepref.setBool("loggedin", true);
                                   Navigator.of(context)
                                       .popUntil((route) => route.isFirst);
                                   Navigator.pop(

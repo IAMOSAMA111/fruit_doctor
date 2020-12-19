@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_doctor/Screens/calculate_fertilizer.dart';
+import 'package:flutter_doctor/Screens/login_checker.dart';
 import 'Screens/login.dart';
 import 'Screens/signup.dart';
 import 'Screens/bottomnav.dart';
@@ -8,6 +10,8 @@ import 'Screens/welcome.dart';
 import 'Screens/forgotPassword.dart';
 import 'Screens/note_home.dart';
 import 'Screens/todoist.dart';
+import 'Screens/todo_list_screen.dart';
+import 'Screens/add_task_screen.dart';
 
 class Routes {
   static Map<String, WidgetBuilder> _defaultRoute = {
@@ -20,6 +24,9 @@ class Routes {
     BottomNavigation.id: (context) => BottomNavigation(),
     NoteHome.id: (context) => NoteHome(),
     Todoist.id: (context) => Todoist(),
+    LoginChecker.id: (context) => LoginChecker(),
+    CalculateFertilizer.id: (context) => CalculateFertilizer(),
+    TodoListScreen.id: (context) => TodoListScreen(),
   };
 
   static Map<String, WidgetBuilder> get ROUTE => _defaultRoute;

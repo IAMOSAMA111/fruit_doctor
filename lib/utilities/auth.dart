@@ -10,6 +10,7 @@ import 'package:flutter_doctor/Screens/bottomnav.dart';
 import 'package:flutter_doctor/Screens/welcome.dart';
 import 'package:dio/dio.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Auth a = Auth.getInstance();
 enum E { username, email, photoURL }
@@ -120,8 +121,10 @@ class Auth {
     }
   }
 
-  takeToHome(BuildContext context) {
+  takeToHome(BuildContext context) async {
     //Popping all the previous pages because we dont want to take the user back to login page if presses the back button
+    SharedPreferences sharepref = await SharedPreferences.getInstance();
+    sharepref.setBool("loggedin", true);
     Navigator.of(context).popUntil((route) => route.isFirst);
     Navigator.pop(
         context, MaterialPageRoute(builder: (context) => (Welcome())));

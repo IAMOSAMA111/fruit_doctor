@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_doctor/Screens/todo_list_screen.dart';
 
 import 'note_home.dart';
 
@@ -13,7 +14,6 @@ class Todoist extends StatelessWidget {
         body:Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -36,9 +36,14 @@ class Todoist extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
-                  child: Card(
-                    elevation: 15,
-                    child: Image(image: AssetImage("assets/images/todo.png"),),
+                  child: GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>TodoListScreen()));
+                    },
+                    child: Card(
+                      elevation: 15,
+                      child: Image(image: AssetImage("assets/images/todo.png"),),
+                    ),
                   ),
                 ),
               ),
