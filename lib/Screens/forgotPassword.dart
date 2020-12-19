@@ -31,152 +31,155 @@ class _Forgot_PasswordState extends State<Forgot_Password> {
       body: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          child: Column(children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SvgPicture.asset('assets/images/Components/upper-left.svg',
-                    height: size.height * 0.1),
-                SizedBox(
-                  width: 55,
-                ),
-                Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  SizedBox(height: 50),
-                  Text(
-                    'FORGOT PASSWORD',
-                    style: topHeadingStyle,
+          child: SingleChildScrollView(
+            child: Column(children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SvgPicture.asset('assets/images/Components/upper-left.svg',
+                      height: size.height * 0.1),
+                  SizedBox(
+                    width: 55,
                   ),
-                ]),
-                SizedBox(
-                  width: 50,
-                ),
-                Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  SizedBox(height: 50),
-                  RotationAnimatedWidget.tween(
-                    duration: Duration(minutes: 3),
-                    delay: Duration(milliseconds: 500),
-                    enabled: true,
-                    rotationDisabled: Rotation.deg(z: -3600),
-                    rotationEnabled: Rotation.deg(z: 0),
-                    child: SvgPicture.asset(
-                        'assets/images/Components/upper-right.svg',
-                        height: size.height * 0.04),
-                  )
-                ]),
-                SizedBox(height: 120),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(height: 30),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(
-                        'assets/images/Components/forgot-password.svg',
-                        height: size.height * 0.27),
-                  ],
-                ),
-                SizedBox(height: 20),
-                Text(
-                  "Don't Worry, You can easily reset it!",
-                  style: labelStyle1,
-                ),
-                SizedBox(height: 40),
-                Container(
-                  alignment: Alignment.centerLeft,
-                  decoration: loginBoxDecorationStyle,
-                  height: 45.0,
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  child: Form(
-                      key: _formEmail,
-                      autovalidate: true,
-                      child: TextFormField(
-                        validator: Validators.compose([
-                          Validators.required('Email is required'),
-                          Validators.email('Invalid email address'),
-                        ]),
-                        keyboardType: TextInputType.emailAddress,
-                        textAlignVertical: TextAlignVertical.center,
-                        textAlign: TextAlign.left,
-                        onChanged: (value) {
-                          this.email = value;
-                        },
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'CM Sans Serif',
-                        ),
-                        decoration: InputDecoration(
-                          errorMaxLines: 1,
-                          isDense: true,
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
-                          errorStyle: TextStyle(
-                            backgroundColor: Colors.red,
+                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+                    SizedBox(height: 50),
+                    Text(
+                      'FORGOT PASSWORD',
+                      style: topHeadingStyle,
+                    ),
+                  ]),
+                  SizedBox(
+                    width: 50,
+                  ),
+                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+                    SizedBox(height: 50),
+                    RotationAnimatedWidget.tween(
+                      duration: Duration(minutes: 3),
+                      delay: Duration(milliseconds: 500),
+                      enabled: true,
+                      rotationDisabled: Rotation.deg(z: -3600),
+                      rotationEnabled: Rotation.deg(z: 0),
+                      child: SvgPicture.asset(
+                          'assets/images/Components/upper-right.svg',
+                          height: size.height * 0.04),
+                    )
+                  ]),
+                  SizedBox(height: 120),
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: 30),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                          'assets/images/Components/forgot-password.svg',
+                          height: size.height * 0.27),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    "Don't Worry, You can easily reset it!",
+                    style: labelStyle1,
+                  ),
+                  SizedBox(height: 40),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    decoration: loginBoxDecorationStyle,
+                    height: 45.0,
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: Form(
+                        key: _formEmail,
+                        autovalidate: true,
+                        child: TextFormField(
+                          validator: Validators.compose([
+                            Validators.required('Email is required'),
+                            Validators.email('Invalid email address'),
+                          ]),
+                          keyboardType: TextInputType.emailAddress,
+                          textAlignVertical: TextAlignVertical.center,
+                          textAlign: TextAlign.left,
+                          onChanged: (value) {
+                            this.email = value;
+                          },
+                          style: TextStyle(
                             color: Colors.white,
-                            height: 0,
+                            fontFamily: 'CM Sans Serif',
                           ),
-                          helperText: '  ',
-                          helperStyle: TextStyle(fontSize: 0, height: 0),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
+                          decoration: InputDecoration(
+                            errorMaxLines: 1,
+                            isDense: true,
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 10),
+                            errorStyle: TextStyle(
+                              backgroundColor: Colors.red,
+                              color: Colors.white,
+                              height: 0,
                             ),
+                            helperText: '  ',
+                            helperStyle: TextStyle(fontSize: 0, height: 0),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                              ),
+                            ),
+                            prefixIcon: Icon(
+                              Icons.alternate_email,
+                              color: placeholderColor,
+                            ),
+                            hintText: 'Email Address',
+                            hintStyle: placeholderStyle,
                           ),
-                          prefixIcon: Icon(
-                            Icons.alternate_email,
-                            color: placeholderColor,
-                          ),
-                          hintText: 'Email Address',
-                          hintStyle: placeholderStyle,
-                        ),
-                      )),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                ButtonTheme(
-                  buttonColor: primary_Color,
-                  minWidth: size.width * 0.8,
-                  height: size.height * 0.05,
-                  child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)),
-                    onPressed: () {
-                      if (!_formEmail.currentState.validate()) {
-                        Fluttertoast.showToast(
-                            msg: "Please Enter a valid Email",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            backgroundColor: Colors.red,
-                            textColor: Colors.white,
-                            fontSize: 16.0);
-                      } else {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    (ForgotPassword2(email))));
-                      }
-                    },
-                    child: Text(
-                      'Continue',
-                      style: TextStyle(color: Colors.white, fontSize: 15),
+                        )),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  ButtonTheme(
+                    buttonColor: primary_Color,
+                    minWidth: size.width * 0.8,
+                    height: size.height * 0.05,
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30)),
+                      onPressed: () {
+                        if (!_formEmail.currentState.validate()) {
+                          Fluttertoast.showToast(
+                              msg: "Please Enter a valid Email",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
+                        } else {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      (ForgotPassword2(email))));
+                        }
+                      },
+                      child: Text(
+                        'Continue',
+                        style: TextStyle(color: Colors.white, fontSize: 15),
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: 80),
-                Row(
-                  children: [
-                    SvgPicture.asset('assets/images/Components/bottom-left.svg',
-                        height: size.height * 0.15),
-                  ],
-                )
-              ],
-            )
-          ])),
+                  SizedBox(height: 80),
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                          'assets/images/Components/bottom-left.svg',
+                          height: size.height * 0.15),
+                    ],
+                  )
+                ],
+              )
+            ]),
+          )),
     ));
   }
 }

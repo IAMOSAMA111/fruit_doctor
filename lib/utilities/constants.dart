@@ -89,7 +89,7 @@ final splashTaglineStyle = TextStyle(
 
 //Top heading style
 final topHeadingStyle = TextStyle(
-  fontSize: 14.0,
+  fontSize: 16.0,
   color: primary_Color,
   fontWeight: FontWeight.bold,
   fontFamily: 'CM Sans Serif',

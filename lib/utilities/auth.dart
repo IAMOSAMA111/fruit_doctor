@@ -12,14 +12,11 @@ import 'package:flutter_doctor/Screens/bottomnav.dart';
 import 'package:flutter_doctor/Screens/welcome.dart';
 import 'package:dio/dio.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-<<<<<<< Updated upstream
 import 'package:shared_preferences/shared_preferences.dart';
-=======
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
 import 'package:flutter_mailer/flutter_mailer.dart';
->>>>>>> Stashed changes
 
 Auth a = Auth.getInstance();
 enum E { username, email, photoURL }
@@ -144,6 +141,14 @@ class Auth {
         print(profile);
         userPrf = profile;
         //setting the user data fields
+        SharedPreferences sharedPreferences =
+            await SharedPreferences.getInstance();
+
+        await sharedPreferences.setString('name', userPrf['name']);
+        await sharedPreferences.setString('email', userPrf['email']);
+        await sharedPreferences.setString(
+            'url', userPrf['picture']['data']['url']);
+
         userProfile[E.username.index] = userPrf['name'];
         userProfile[E.email.index] = userPrf['email'];
         userProfile[E.photoURL.index] = userPrf['picture']['data']['url'];
@@ -174,6 +179,16 @@ class Auth {
       userProfile[E.username.index] = _googleSignIn.currentUser.displayName;
       userProfile[E.email.index] = _googleSignIn.currentUser.email;
       userProfile[E.photoURL.index] = _googleSignIn.currentUser.photoUrl;
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+
+      await sharedPreferences.setString(
+          'name', _googleSignIn.currentUser.displayName);
+      await sharedPreferences.setString(
+          'email', _googleSignIn.currentUser.email);
+      await sharedPreferences.setString(
+          'url', _googleSignIn.currentUser.photoUrl);
+
       takeToHome(context);
       isLoggedIn = true;
     } catch (err) {

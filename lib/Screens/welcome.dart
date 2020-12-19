@@ -41,9 +41,15 @@ class _WelcomeState extends State<Welcome> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               SizedBox(height: 50),
-                              Text(
-                                'WELCOME',
-                                style: topHeadingStyle,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'WELCOME',
+                                    style: topHeadingStyle,
+                                  ),
+                                ],
                               ),
                             ]),
                         SizedBox(

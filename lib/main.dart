@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_doctor/Provider/test.dart';
 import 'package:flutter_doctor/Screens/bottomnav.dart';
 import 'package:flutter_doctor/Screens/calculate_fertilizer.dart';
+import 'package:flutter_doctor/Screens/loader.dart';
 import 'package:flutter_doctor/Screens/login.dart';
 import 'package:flutter_doctor/Screens/login_checker.dart';
 import 'package:flutter_doctor/Screens/note_home.dart';
@@ -32,8 +33,7 @@ class FruitDoctor extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Fruit Doctor',
         theme: fruitDoctorThemeData,
-        initialRoute: BottomNavigation.id,
-        //initialRoute:auth.a.isLoggedIn ? BottomNavigation.id : Welcome.id,
+        initialRoute: LoginChecker.id,
         routes: Routes.ROUTE,
       ),
     );

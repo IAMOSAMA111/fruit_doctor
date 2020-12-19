@@ -23,7 +23,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
   final _pageOption = [
     Home(),
-
     Text(
       "Community",
       style: TextStyle(fontSize: 20),
@@ -36,7 +35,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: SafeArea(
-
         child: Scaffold(
           appBar: AppBar(
             title: Text('Fruit Doctor'),
