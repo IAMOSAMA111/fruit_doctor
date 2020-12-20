@@ -4,7 +4,7 @@ import 'package:flutter_doctor/Screens/login.dart';
 import 'package:flutter_doctor/Screens/welcome.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:flutter_doctor/Screens/loader.dart';
 import 'bottomnav.dart';
 
 class LoginChecker extends StatefulWidget {
@@ -13,7 +13,9 @@ class LoginChecker extends StatefulWidget {
   _LoginCheckerState createState() => _LoginCheckerState();
 }
 
+@override
 class _LoginCheckerState extends State<LoginChecker> {
+  bool isLoading = false;
   void goToIntialScreen() async {
     SharedPreferences sharedpref = await SharedPreferences.getInstance();
 
@@ -29,7 +31,10 @@ class _LoginCheckerState extends State<LoginChecker> {
 
   @override
   Widget build(BuildContext context) {
-    goToIntialScreen();
-    return Container();
+    this.setState(() {
+      isLoading = true;
+      goToIntialScreen();
+    });
+    return isLoading ? Loader() : Scaffold();
   }
 }

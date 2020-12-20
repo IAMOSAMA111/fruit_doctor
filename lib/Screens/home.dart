@@ -433,7 +433,7 @@ class _HomeState extends State<Home> {
                             height: 10,
                           ),
                           Text(
-                            "Pest and  ",
+                            "Pest and Diseases ",
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w600),
                           )
