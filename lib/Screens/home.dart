@@ -66,6 +66,10 @@ class _HomeState extends State<Home> {
 
   var temp;
   var description;
+  String fruit1 = "Apple";
+  String fruit2 = "Citrus";
+  String fruit3 = "Pomegranate";
+  String fruit4 = "Water Mellon";
 
   Future getWeatherInfo() async {
     http.Response response = await http.get(
@@ -177,13 +181,33 @@ class _HomeState extends State<Home> {
                   Expanded(
                     child: Container(
                       child: TabBarView(children: [
-                        homeTop(context, Colors.redAccent,
-                            CalculateFertilizer(), Todoist()),
-                        homeTop(context, Colors.deepOrangeAccent,
-                            CalculateFertilizer(), Todoist()),
-                        homeTop(context, Colors.red, CalculateFertilizer(),
+                        homeTop(
+                            context,
+                            Colors.redAccent,
+                            CalculateFertilizer(
+                              fruit: fruit1,
+                            ),
                             Todoist()),
-                        homeTop(context, appbar_Color, CalculateFertilizer(),
+                        homeTop(
+                            context,
+                            Colors.deepOrangeAccent,
+                            CalculateFertilizer(
+                              fruit: fruit2,
+                            ),
+                            Todoist()),
+                        homeTop(
+                            context,
+                            Colors.red,
+                            CalculateFertilizer(
+                              fruit: fruit3,
+                            ),
+                            Todoist()),
+                        homeTop(
+                            context,
+                            appbar_Color,
+                            CalculateFertilizer(
+                              fruit: fruit4,
+                            ),
                             Todoist()),
                       ]),
                     ),

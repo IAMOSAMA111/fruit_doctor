@@ -3,6 +3,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_doctor/Screens/scraper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_doctor/Screens/home.dart';
 import 'package:flutter_doctor/Screens/profile.dart';
@@ -28,6 +29,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
       style: TextStyle(fontSize: 20),
     ),
     Todoist(),
+    ScraperScreen(),
     Profile()
   ];
 
@@ -65,6 +67,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
               BottomNavigationBarItem(
                 icon: FaIcon(FontAwesomeIcons.stickyNote),
                 title: Text("Todoist"),
+              ),
+              BottomNavigationBarItem(
+                icon: FaIcon(FontAwesomeIcons.globe),
+                title: Text("Pundit"),
               ),
               BottomNavigationBarItem(
                 icon: FaIcon(FontAwesomeIcons.user),

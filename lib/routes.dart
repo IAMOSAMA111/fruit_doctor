@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_doctor/Screens/calculate_fertilizer.dart';
 import 'package:flutter_doctor/Screens/login_checker.dart';
+import 'package:flutter_doctor/Screens/scraper.dart';
+import 'package:flutter_doctor/Screens/test.dart';
 import 'Screens/login.dart';
 import 'Screens/signup.dart';
 import 'Screens/bottomnav.dart';
@@ -27,6 +29,8 @@ class Routes {
     LoginChecker.id: (context) => LoginChecker(),
     CalculateFertilizer.id: (context) => CalculateFertilizer(),
     TodoListScreen.id: (context) => TodoListScreen(),
+    ScraperScreen.id: (context) => ScraperScreen(),
+    Test.id: (context) => Test(),
   };
 
   static Map<String, WidgetBuilder> get ROUTE => _defaultRoute;
